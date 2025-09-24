@@ -1,0 +1,5 @@
+com\pruebatecnica\orangehrm\pages\LoginPage.class
+com\pruebatecnica\orangehrm\stepdefinitions\LoginStepDefinitions.class
+com\pruebatecnica\orangehrm\runners\TestRunner.class
+com\pruebatecnica\orangehrm\hooks\TestHooks.class
+com\pruebatecnica\orangehrm\utils\Config.class

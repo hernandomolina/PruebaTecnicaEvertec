@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Cucumber" time="12.754" tests="3" skipped="0" failures="0" errors="0">
+<testcase classname="Funcionalidad de inicio de sesión" name="Inicio de sesión exitoso con credenciales válidas" time="5.379">
+<system-out><![CDATA[
+Given que el usuario navega a la página de inicio de sesión de OrangeHRM....passed
+When el usuario ingresa un nombre de usuario y contraseña válidos...........passed
+And hace clic en el botón de inicio de sesión...............................passed
+Then el usuario debería iniciar sesión exitosamente.........................passed
+]]></system-out>
+</testcase>
+<testcase classname="Funcionalidad de inicio de sesión" name="Fallo en el inicio de sesión con credenciales inválidas" time="3.475">
+<system-out><![CDATA[
+Given que el usuario navega a la página de inicio de sesión de OrangeHRM....passed
+When el usuario ingresa un nombre de usuario inválido "usuario_invalido"....passed
+And ingresa una contraseña inválida "contraseña_incorrecta".................passed
+And hace clic en el botón de inicio de sesión...............................passed
+Then el usuario debería ver un mensaje de error.............................passed
+And debería permanecer en la página de inicio de sesión.....................passed
+]]></system-out>
+</testcase>
+<testcase classname="Funcionalidad de inicio de sesión" name="Fallo en el inicio de sesión con credenciales vacías" time="3.106">
+<system-out><![CDATA[
+Given que el usuario navega a la página de inicio de sesión de OrangeHRM....passed
+When el usuario ingresa un nombre de usuario vacío..........................passed
+And ingresa una contraseña vacía............................................passed
+And hace clic en el botón de inicio de sesión...............................passed
+Then el usuario debería ver errores de validación...........................passed
+And debería permanecer en la página de inicio de sesión.....................passed
+]]></system-out>
+</testcase>
+</testsuite>

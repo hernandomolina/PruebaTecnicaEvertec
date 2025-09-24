@@ -1,0 +1,4 @@
+"Story","Title","Result","Date","Stability","Duration (s)"
+"Funcionalidad de inicio de sesión","Inicio de sesión exitoso con credenciales válidas","SUCCESS","2025-09-24T16:32:56.2545153-05:00[America/Bogota]","0.0","5.29"
+"Funcionalidad de inicio de sesión","Fallo en el inicio de sesión con credenciales inválidas","SUCCESS","2025-09-24T16:33:01.753924-05:00[America/Bogota]","0.0","3.46"
+"Funcionalidad de inicio de sesión","Fallo en el inicio de sesión con credenciales vacías","SUCCESS","2025-09-24T16:33:05.3507033-05:00[America/Bogota]","0.0","3.1"
