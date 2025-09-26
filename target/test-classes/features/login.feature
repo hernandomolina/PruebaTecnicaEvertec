@@ -1,4 +1,4 @@
-@smoke @login
+@login
 Feature: Funcionalidad de inicio de sesión
   Como usuario de OrangeHRM
   Quiero poder iniciar sesión en el sistema

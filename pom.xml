@@ -52,7 +52,15 @@
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
-            <version>5.4.1</version>
+            <version>5.6.2</version>
+        </dependency>
+
+        <!-- MySQL Connector (Opcional - para validaciones de BD) -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.33</version>
+            <scope>test</scope>
         </dependency>
 
         <!-- Test Dependencies -->
@@ -102,6 +110,12 @@
                         <include>**/*Test.java</include>
                         <include>**/*TestRunner.java</include>
                     </includes>
+                    <!-- Configuración para ejecución en paralelo - Restaurada y estable -->
+                    <parallel>classes</parallel>
+                    <threadCount>2</threadCount>
+                    <forkCount>2</forkCount>
+                    <reuseForks>true</reuseForks>
+                    <!-- systemPropertyVariables eliminado para permitir configuración específica por runner -->
                 </configuration>
                 <executions>
                     <execution>

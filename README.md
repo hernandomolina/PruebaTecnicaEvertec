@@ -1,170 +1,173 @@
-# Proyecto de Automatización de Pruebas - OrangeHRM
+# Prueba Técnica Evertec - Automatización de Pruebas OrangeHRM
 
-Este proyecto implementa automatización de pruebas para OrangeHRM usando **Java 17**, **Serenity BDD**, **JUnit 4** y **Selenium WebDriver**, siguiendo el patrón **Page Object Model (POM)**.
+## 📋 Descripción del Proyecto
 
-## 🏗️ Estructura del Proyecto
-
-```
-├── serenity.properties               # Configuración de Serenity BDD
-├── pom.xml                          # Configuración de Maven
-└── src/
-    ├── main/
-    │   └── java/                     # Código fuente principal (si es necesario)
-    └── test/
-        └── java/com/pruebatecnica/orangehrm/
-            ├── pages/                # Page Objects
-            │   ├── BasePage.java     # Página base con métodos comunes
-            │   └── LoginPage.java    # Página de login (ejemplo)
-            ├── tests/                # Clases de prueba
-            │   ├── TestBase.java     # Clase base para todos los tests
-            │   └── ExampleTest.java  # Test de ejemplo
-            ├── runners/              # Test Runners
-            │   └── TestRunner.java   # Runner principal para Cucumber
-            └── utils/                # Utilidades
-                ├── WebDriverFactory.java  # Factory para crear drivers
-                └── Config.java            # Manejo de configuraciones
-```
+Este proyecto implementa automatización de pruebas para el sistema OrangeHRM utilizando **Serenity BDD** con **Cucumber** y **Selenium WebDriver**. El framework está diseñado para ejecutar pruebas en paralelo en múltiples navegadores (Chrome y Edge).
 
 ## 🚀 Tecnologías Utilizadas
 
-- **Java 17**: Lenguaje de programación
-- **Maven**: Herramienta de construcción y gestión de dependencias
-- **Serenity BDD**: Framework para testing BDD con reportes avanzados
-- **JUnit 4**: Framework de testing
-- **Selenium WebDriver 4.28.0**: Automatización de navegadores web
-- **WebDriverManager 5.6.2**: Gestión automática de drivers
-- **AssertJ 3.25.1**: Librería de assertions más fluidas
+- **Java 17**
+- **Maven 3.9.8**
+- **Serenity BDD 3.9.8**
+- **Cucumber 7.17.0**
+- **Selenium WebDriver 4.10.0**
+- **JUnit 5.10.0**
+- **WebDriverManager 5.6.2**
 
-## 📋 Requisitos Previos
+## 📁 Estructura del Proyecto
 
+```
+src/
+├── main/java/
+└── test/
+    ├── java/com/pruebatecnica/orangehrm/
+    │   ├── hooks/
+    │   │   └── TestHooks.java
+    │   ├── pages/
+    │   │   ├── AddEmployeePage.java
+    │   │   ├── EmployeeDetailsPage.java
+    │   │   ├── EmployeeListPage.java
+    │   │   ├── LoginPage.java
+    │   │   └── PimPage.java
+    │   ├── runners/
+    │   │   ├── ChromeTestRunner.java
+    │   │   └── EdgeTestRunner.java
+    │   ├── stepdefinitions/
+    │   │   ├── EmployeeStepDefinitions.java
+    │   │   └── LoginStepDefinitions.java
+    │   └── utils/
+    │       └── Config.java
+    └── resources/
+        └── features/
+            ├── employee-abm.feature
+            └── login.feature
+```
+
+## 🧪 Casos de Prueba Implementados
+
+### 🔐 Funcionalidad de Login
+- ✅ **Login exitoso** con credenciales válidas
+- ❌ **Login fallido** con credenciales inválidas
+- ❌ **Login fallido** con credenciales vacías
+
+### 👥 ABM de Empleados
+- ✅ **Crear empleado** exitosamente
+- ✅ **Modificar empleado** existente
+- ✅ **Eliminar empleado** existente
+
+## 🏃‍♂️ Ejecución de Pruebas
+
+### Prerequisitos
 - Java 17 o superior
 - Maven 3.6 o superior
-- Navegador web (Chrome, Firefox o Edge)
+- Navegadores Chrome y Edge instalados
 
-## 🛠️ Configuración del Proyecto
+### Comandos de Ejecución
 
-### 1. Clonar el repositorio
-```bash
-git clone <url-del-repositorio>
-cd orangehrm-automation
-```
-
-### 2. Instalar dependencias
-```bash
-mvn clean install
-```
-
-### 3. Configurar navegador
-El proyecto está configurado para usar Chrome por defecto. Para cambiar el navegador, edita el archivo `serenity.properties` en la raíz del proyecto:
-
-```properties
-# Para Chrome (por defecto)
-webdriver.driver=chrome
-
-# Para Firefox
-webdriver.driver=firefox
-
-# Para Edge
-webdriver.driver=edge
-```
-
-## 🏃‍♂️ Ejecución de Tests
-
-### Ejecutar todos los tests
-```bash
-mvn clean test
-```
-
-### Ejecutar tests con reportes de Serenity
+#### Ejecutar todas las pruebas en paralelo
 ```bash
 mvn clean verify
 ```
 
-### Ejecutar tests específicos
+#### Ejecutar solo pruebas de Chrome
 ```bash
-mvn clean test -Dtest=ExampleTest
+mvn clean verify "-Dtest=ChromeTestRunner" "-Dserenity.browser=chrome"
 ```
 
-### Ejecutar con navegador específico
+#### Ejecutar solo pruebas de Edge
 ```bash
-mvn clean test -Dbrowser=firefox
+mvn clean verify "-Dtest=EdgeTestRunner" "-Dserenity.browser=edge"
+```
+
+#### Ejecutar pruebas específicas por tags
+```bash
+# Solo pruebas de login
+mvn clean verify "-Dcucumber.filter.tags=@login"
+
+# Solo pruebas de ABM
+mvn clean verify "-Dcucumber.filter.tags=@abm"
+
+# Solo pruebas de crear empleado
+mvn clean verify "-Dcucumber.filter.tags=@create"
+
+# Solo pruebas de modificar empleado
+mvn clean verify "-Dcucumber.filter.tags=@modify"
+
+# Solo pruebas de eliminar empleado
+mvn clean verify "-Dcucumber.filter.tags=@delete"
 ```
 
 ## 📊 Reportes
 
-Después de ejecutar los tests, los reportes se generan en:
-- **Serenity Reports**: `target/site/serenity/index.html`
-- **Cucumber Reports**: `target/cucumber-reports/`
+Los reportes de Serenity BDD se generan automáticamente en:
+- **Reporte HTML:** `target/site/serenity/index.html`
+- **Reportes JSON:** `target/cucumber-reports/`
+- **Reportes XML:** `target/failsafe-reports/`
 
-## 🏛️ Arquitectura del Proyecto
+## ⚙️ Configuración
+
+### Navegadores Soportados
+- **Chrome:** Descarga automática del driver via WebDriverManager
+- **Edge:** Driver local configurado en `C:\Drivers\Edge\msedgedriver.exe`
+
+### Configuración de Paralelización
+- **Threads:** Configurado para ejecución en paralelo
+- **Navegadores:** Chrome y Edge ejecutándose simultáneamente
+- **Reportes:** Separados por navegador
+
+## 🔧 Características Técnicas
 
 ### Page Object Model (POM)
-- **BasePage**: Clase base con métodos comunes para todas las páginas
-- **LoginPage**: Ejemplo de Page Object para la página de login
-- Cada Page Object encapsula elementos y acciones de una página específica
+- Implementación del patrón Page Object Model
+- Separación clara entre lógica de negocio y elementos de UI
+- Reutilización de código entre diferentes pruebas
 
-### Configuración Centralizada
-- **Config.java**: Manejo centralizado de configuraciones
-- **serenity.properties**: Configuraciones de Serenity BDD (ubicado en la raíz del proyecto)
-- **WebDriverFactory.java**: Factory para crear instancias de WebDriver
+### BDD (Behavior-Driven Development)
+- Escenarios escritos en Gherkin
+- Step definitions en Java
+- Documentación viva y legible
 
-### Base de Tests
-- **TestBase.java**: Clase base para todos los tests con setup/teardown
-- **ExampleTest.java**: Ejemplo de test que extiende de TestBase
+### Manejo de Datos
+- Generación automática de IDs de empleados
+- Captura dinámica de IDs generados por el sistema
+- Persistencia de datos entre steps
 
-## 📝 Convenciones de Código
+### Esperas Explícitas
+- Reemplazo de `Thread.sleep()` por esperas explícitas
+- Uso de `WebElementFacade` para mejor manejo de elementos
+- Timeouts configurables por elemento
 
-### Naming Conventions
-- Clases: PascalCase (ej: `LoginPage`, `TestBase`)
-- Métodos: camelCase (ej: `enterUsername`, `clickLoginButton`)
-- Variables: camelCase (ej: `username`, `loginButton`)
-- Constantes: UPPER_SNAKE_CASE (ej: `USERNAME_FIELD`, `LOGIN_BUTTON`)
+## 📝 Notas de Desarrollo
 
-### Anotaciones Serenity
-- `@Step`: Para métodos que representan pasos de prueba
-- `@Title`: Para dar títulos descriptivos a los tests
-- `@RunWith(SerenityRunner.class)`: Para ejecutar tests con Serenity BDD
+### Optimizaciones Implementadas
+- ✅ Eliminación de métodos no utilizados
+- ✅ Limpieza de código redundante
+- ✅ Optimización de navegación entre páginas
+- ✅ Eliminación de emojis en logs para mejor legibilidad
 
-## 🔧 Configuraciones Importantes
+### Patrones de Diseño
+- **Page Object Model:** Para manejo de páginas web
+- **Step Definitions:** Para mapeo de pasos Gherkin
+- **Hooks:** Para configuración y limpieza de pruebas
+- **Runners:** Para ejecución de diferentes suites de pruebas
 
-### Timeouts
-```properties
-webdriver.timeouts.implicitlywait=10000
-serenity.timeout.for.page.loads=30000
-```
+## 🐛 Solución de Problemas
 
-### Capturas de Pantalla
-```properties
-serenity.take.screenshots=FOR_EACH_ACTION
-```
+### Problemas Comunes
+1. **Driver no encontrado:** Verificar que los navegadores estén instalados
+2. **Timeouts:** Ajustar timeouts en `serenity.properties`
+3. **Elementos no encontrados:** Verificar XPath y esperas explícitas
 
-### URLs de la Aplicación
-```properties
-app.base.url=https://opensource-demo.orangehrmlive.com/
-app.admin.username=Admin
-app.admin.password=admin123
-```
+### Logs de Depuración
+- Los logs se generan en consola durante la ejecución
+- Información detallada de cada paso ejecutado
+- Identificación clara de errores y warnings
 
-## 📚 Próximos Pasos
+## 📞 Contacto
 
-1. **Implementar más Page Objects** según las páginas de la aplicación
-2. **Crear casos de prueba específicos** basados en los requerimientos
-3. **Configurar CI/CD** para ejecución automática
-4. **Agregar más configuraciones** según necesidades del proyecto
-5. **Implementar manejo de datos de prueba** (Excel, JSON, etc.)
-
-## 🤝 Contribución
-
-1. Fork el proyecto
-2. Crear una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abrir un Pull Request
-
-## 📄 Licencia
-
-Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
+Desarrollado como parte de la prueba técnica para Evertec.
 
 ---
 
-**Nota**: Este es un proyecto de estructura base. Los casos de prueba específicos deben implementarse según los requerimientos del proyecto.
+**Versión:** 1.0.0  
+**Última actualización:** Septiembre 2025

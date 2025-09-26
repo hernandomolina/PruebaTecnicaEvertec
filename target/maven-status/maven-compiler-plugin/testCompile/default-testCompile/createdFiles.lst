@@ -1,5 +1,11 @@
-com\pruebatecnica\orangehrm\pages\LoginPage.class
-com\pruebatecnica\orangehrm\stepdefinitions\LoginStepDefinitions.class
-com\pruebatecnica\orangehrm\runners\TestRunner.class
-com\pruebatecnica\orangehrm\hooks\TestHooks.class
+com\pruebatecnica\orangehrm\runners\ChromeTestRunner.class
+com\pruebatecnica\orangehrm\pages\PimPage.class
+com\pruebatecnica\orangehrm\pages\EmployeeDetailsPage.class
+com\pruebatecnica\orangehrm\runners\EdgeTestRunner.class
 com\pruebatecnica\orangehrm\utils\Config.class
+com\pruebatecnica\orangehrm\pages\LoginPage.class
+com\pruebatecnica\orangehrm\pages\AddEmployeePage.class
+com\pruebatecnica\orangehrm\hooks\TestHooks.class
+com\pruebatecnica\orangehrm\stepdefinitions\EmployeeStepDefinitions.class
+com\pruebatecnica\orangehrm\stepdefinitions\LoginStepDefinitions.class
+com\pruebatecnica\orangehrm\pages\EmployeeListPage.class

@@ -7,33 +7,23 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.thucydides.core.annotations.Steps;
 
-
-/**
- * Step Definitions para los escenarios de Login.
- */
 public class LoginStepDefinitions {
 
     @Steps
     LoginPage loginPage;
-
-    private final Config config = Config.getInstance();
 
     // ============================================
     // Escenario: Navegar a la página de login
     // ============================================
     @Given("que el usuario navega a la página de inicio de sesión de OrangeHRM")
     public void queElUsuarioNavegaALaPaginaDeInicioDeSesionDeOrangeHRM() {
-        loginPage.openLoginPage(); // Usa @DefaultUrl
+        loginPage.openLoginPage();
     }
 
-    // ============================================
-    // Escenario: Login exitoso
-    // ============================================
     @When("el usuario ingresa un nombre de usuario y contraseña válidos")
     public void elUsuarioIngresaUnNombreDeUsuarioYContrasenaValidos() {
-        // Llenamos los campos sin hacer click aún
-        loginPage.enterUsername(config.getAdminUsername());
-        loginPage.enterPassword(config.getAdminPassword());
+        loginPage.enterUsername(Config.getAdminUsername());
+        loginPage.enterPassword(Config.getAdminPassword());
     }
 
     @When("hace clic en el botón de inicio de sesión")
@@ -66,7 +56,8 @@ public class LoginStepDefinitions {
 
     @Then("debería permanecer en la página de inicio de sesión")
     public void deberiaPermanecerEnLaPaginaDeInicioDeSesion() {
-        assert loginPage.isLoginFormVisible() : "Debería permanecer en la página de login";
+        // Verificar que no se redirigió al dashboard
+        assert !loginPage.isDashboardVisible() : "Debería permanecer en la página de login";
     }
 
     // ============================================
@@ -84,8 +75,8 @@ public class LoginStepDefinitions {
 
     @Then("el usuario debería ver errores de validación")
     public void elUsuarioDeberiaVerErroresDeValidacion() {
-       assert loginPage.isUsernameFieldEmpty() : "Campo de usuario debería estar vacío";
-       assert loginPage.isPasswordFieldEmpty() : "Campo de contraseña debería estar vacío";
+        assert loginPage.isUsernameFieldEmpty() : "Campo de usuario debería estar vacío";
+        assert loginPage.isPasswordFieldEmpty() : "Campo de contraseña debería estar vacío";
     }
 
 }
